@@ -176,6 +176,14 @@ io.sockets.on("connection", function(socket){
 		io.to(users[data.usr][0]).emit("kick_user_success");
 	});
 	
+	//request user ban
+	socket.on("request_user_ban", function(data) {
+		users[data.banned][2] = "Lobby";
+		io.to(users[data.banned][0]).emit("you_were_banned", {chat:users[data.banned][2]});
+		io.to(users[data.banned][0]).emit("change_room_success", {room:"Lobby", admin:"false"});
+		io.to(users[data.usr][0]).emit("ban_user_success");
+	});
+	
 	//if you tried to join a password-protected room, you get this dude
 	socket.on("change_password_room", function(data) {
 		if(data.pass === "") {

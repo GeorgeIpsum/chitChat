@@ -17,7 +17,7 @@
 		//Some globals
 		var user; //username
 		var UID; //this isn't used i think
-		//var chatrooms = [];
+		var chatrooms = [];
 		var chatroom_in_use;
 		var is_admin; //if you're an admin in the room you're in
 		var pms = []; //array of private messages you're in
@@ -402,9 +402,14 @@
 		});
 		
 		function ban_user(some_user) { //lol
-			//socketio.emit("request_user_ban", {banned:some_user, usr:user});
-			kick_user(some_user);
-		}
+			socketio.emit("request_user_ban", {banned:some_user, usr:user});
+			//kick_user(some_user);
+		} socketio.on("ban_user_success", function() {
+			
+		});
+		socketio.on("you_were_banned", function() {
+			
+		});
 		
 		function update_pms() { //updates pm listings
 			var pm_list = document.getElementById("pm-bar");
