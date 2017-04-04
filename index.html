@@ -17,7 +17,8 @@
 		//Some globals
 		var user; //username
 		var UID; //this isn't used i think
-		var banned_chatrooms = ["the_danger_zone"];
+		var banned_chatrooms = {};
+		banned_chatrooms.the_danger_zone = ["the_danger_zone"];
 		var chatroom_in_use;
 		var is_admin; //if you're an admin in the room you're in
 		var pms = []; //array of private messages you're in
@@ -37,7 +38,7 @@
 			is_admin = "false"; //not in my swamp
 			var fail = document.getElementById("fail-reason");
 			fail.innerHTML = "";
-			//display_chatrooms();
+			display_chatrooms();
 			remove_landing();
 			update_users();
 		});
@@ -59,7 +60,7 @@
 		function remove_landing() {
 			document.getElementById("landing").style.display = "none";
 			document.getElementById("chatroom").style.display = "block";
-			document.getElementById("Lobby").className = "active";
+			//document.getElementById("Lobby").className = "active";
 		}
 		
 		//Sending a message
@@ -153,10 +154,16 @@
 			chatroom_list.innerHTML = "";
 			//chatrooms = data.chatroom_array;
 			var chatlist = data.chatroom_array;
-			for(var i=0; i<banned_chatrooms.length; i++) { //chatlist is put into an array
-				for(var c in chatlist) {
-					console.log(chatlist[c][1]); console.log(banned_chatrooms[i]);
-					if(chatlist[c][1] !== banned_chatrooms[i]) {
+			for(var c in chatlist) { //chatlist is put into an array
+				var isnt_banned = true;
+				for(var d in banned_chatrooms) {
+					if(chatlist[c][1] === banned_chatrooms[d][0]) {
+						isnt_banned = false;
+					}
+				}
+				if(isnt_banned) {
+					console.log(chatlist[c][1]); console.log(banned_chatrooms[d][0]);
+					if(chatlist[c][1] !== banned_chatrooms[d][0]) {
 						var chat_li = document.createElement("li");
 						var chat_a = document.createElement("a");
 						chat_a.setAttribute("href", "#");
@@ -412,7 +419,7 @@
 		});
 		socketio.on("you_were_banned", function(data) {
 			chatroom_in_use = "Lobby";
-			banned_chatrooms.push(data.chat);
+			banned_chatrooms[data.chat] = [data.chat];
 			update_users();
 			update_chatroom();
 			update_pms();
