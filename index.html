@@ -17,7 +17,7 @@
 		//Some globals
 		var user; //username
 		var UID; //this isn't used i think
-		var banned_chatrooms = [];
+		var banned_chatrooms = ["the_danger_zone"];
 		var chatroom_in_use;
 		var is_admin; //if you're an admin in the room you're in
 		var pms = []; //array of private messages you're in
@@ -34,7 +34,6 @@
 			UID = Math.random().toString(36).substring(3,16) + (+new Date()); //we could do some refresh/ set stuff but jordan doesn't want to
 			localStorage.setItem("chatroom_ID", UID); //still dont use this
 			chatroom_in_use = "Lobby";
-			//chatrooms.push("Lobby");
 			is_admin = "false"; //not in my swamp
 			var fail = document.getElementById("fail-reason");
 			fail.innerHTML = "";
@@ -154,9 +153,10 @@
 			chatroom_list.innerHTML = "";
 			//chatrooms = data.chatroom_array;
 			var chatlist = data.chatroom_array;
-			for(var c in chatlist) { //chatlist is put into an array
-				for(var d in banned_chatrooms) {
-					if(chatlist[c][1] !== banned_chatrooms[d]) {
+			for(var i=0; i<banned_chatrooms.length; i++) { //chatlist is put into an array
+				for(var c in chatlist) {
+					console.log(chatlist[c][1]); console.log(banned_chatrooms[i]);
+					if(chatlist[c][1] !== banned_chatrooms[i]) {
 						var chat_li = document.createElement("li");
 						var chat_a = document.createElement("a");
 						chat_a.setAttribute("href", "#");

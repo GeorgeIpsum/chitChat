@@ -21,6 +21,7 @@ app.listen(3456);
 var users = {};
 var chatrooms = {};
 chatrooms.Lobby = ["admin", "Lobby", "public", ""];
+chatrooms.the_danger_zone = ["admin", "the_danger_zone", "public", ""];
 var pms = {};
 
 // Do the Socket.IO magic:
