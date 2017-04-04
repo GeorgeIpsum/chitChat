@@ -7,33 +7,11 @@ body {
   padding-top: 50px;
 }
 .chat-bar {
+  margin: -40px;
   position: fixed;
   bottom: 0px;
-  height: 25px;
-  width:60%;
-}
-
-.pm {
-  color: green;
-}
-
-.private {
-  font-size: smaller;
-  color: gray;
-}
-
-.dude {
-  font-size: xx-small;
-  color: black;
-}
-
-.doo {
-  font-size: xx-small;
-  color: white;
-}
-
-.beware {
-  color: red;
+  height: 70px;
+  width:67%;
 }
 
 .user-type {
@@ -44,16 +22,26 @@ body {
 }
 
 #chat-area {
-  height: 25px;
+  height: 30px;
   width: 90%;
   box-sizing: border-box;
 }
 #chat-submit {
-  height: 25px;
+  height: 30px;
   width: 9%;
+  font-weight: bold;
+  box-sizing:border-box;
 }
 #chatlog {
   word-wrap: break-word;
+}
+
+.bunt {
+  color: #428bca;
+}
+
+.buntt {
+  color: #428bca;
 }
 
 /*
@@ -156,60 +144,3 @@ body {
   display:flex;
   flex-direction: column;
 }
-
-
-
-
-
-
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-

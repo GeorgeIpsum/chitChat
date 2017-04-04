@@ -243,6 +243,7 @@
 			pass_input.setAttribute("id", "pwdinput_" + data.room);
 			var pass_submit = document.createElement("button");
 			pass_submit.setAttribute("id", "pass_" + data.room);
+			pass_submit.setAttribute("class", "buntt");
 			pass_submit.innerHTML = "Submit";
 			some_div.appendChild(document.createElement("br"));
 			some_div.appendChild(pass_input);
@@ -583,7 +584,7 @@
 					</div>
 					<div class="chat-bar">
 						<input id="chat-area" type="text" placeholder="Type here!" required autofocus/>
-						<input id="chat-submit" type="button" value="Enter"/>
+						<input id="chat-submit" type="button" class = "bunt" value="ENTER"/>
 						<script type="text/javascript">
 							document.getElementById("chat-submit").addEventListener("click", send_message, false);
 							document.getElementById("chat-area").addEventListener("input", user_typing ,false);
@@ -593,7 +594,7 @@
 				<div id="users-in-chat" class="col-sm-3 col-sm-offset-9 col-md-2 col-md-offset-10 col-lg-2 col-lg-offset-10 sidebar">
 					<h4 class="text-center">Broadcast</h4><br>
 					<input type="text" class="center-block" id="msg-broadcast" placeholder="Message All Users"/>
-					<input type="button" class="center-block" id="btn-broadcast" value="Submit"/>
+					<input type="button" class="center-block" id="btn-broadcast" class = "buntt" value="Submit"/>
 					<script type="text/javascript">
 						document.getElementById("btn-broadcast").addEventListener("click", broadcast_message, false);
 					</script>
