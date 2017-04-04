@@ -17,7 +17,7 @@
 		//Some globals
 		var user; //username
 		var UID; //this isn't used i think
-		var chatrooms = [];
+		var banned_chatrooms = [];
 		var chatroom_in_use;
 		var is_admin; //if you're an admin in the room you're in
 		var pms = []; //array of private messages you're in
@@ -155,8 +155,8 @@
 			//chatrooms = data.chatroom_array;
 			var chatlist = data.chatroom_array;
 			for(var c in chatlist) { //chatlist is put into an array
-				//for(var d in chatrooms) {
-					//if(chatlist[c][1] === chatrooms[d]) {
+				for(var d in banned_chatrooms) {
+					if(chatlist[c][1] !== banned_chatrooms[d]) {
 						var chat_li = document.createElement("li");
 						var chat_a = document.createElement("a");
 						chat_a.setAttribute("href", "#");
@@ -172,8 +172,8 @@
 						}
 						chat_li.appendChild(chat_a);
 						chatroom_list.appendChild(chat_li);
-					//}
-				//}
+					}
+				}
 			} //creates a bunch of chat listings, appends to the chat list UL element
 		});
 		
@@ -403,12 +403,20 @@
 		
 		function ban_user(some_user) { //lol
 			socketio.emit("request_user_ban", {banned:some_user, usr:user});
-			//kick_user(some_user);
+			socketio.emit("message_to_server", {message:"was banned from the room", nick:some_user, chat:chatroom_in_use});
 		} socketio.on("ban_user_success", function() {
-			
+			update_users();
+			update_chatroom();
+			update_pms();
+			display_chatrooms();
 		});
-		socketio.on("you_were_banned", function() {
-			
+		socketio.on("you_were_banned", function(data) {
+			chatroom_in_use = "Lobby";
+			banned_chatrooms.push(data.chat);
+			update_users();
+			update_chatroom();
+			update_pms();
+			display_chatrooms();
 		});
 		
 		function update_pms() { //updates pm listings

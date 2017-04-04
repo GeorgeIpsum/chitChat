@@ -178,8 +178,9 @@ io.sockets.on("connection", function(socket){
 	
 	//request user ban
 	socket.on("request_user_ban", function(data) {
+		var banned_chat = users[data.banned][2];
 		users[data.banned][2] = "Lobby";
-		io.to(users[data.banned][0]).emit("you_were_banned", {chat:users[data.banned][2]});
+		io.to(users[data.banned][0]).emit("you_were_banned", {chat:banned_chat});
 		io.to(users[data.banned][0]).emit("change_room_success", {room:"Lobby", admin:"false"});
 		io.to(users[data.usr][0]).emit("ban_user_success");
 	});
